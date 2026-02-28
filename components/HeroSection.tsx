@@ -36,13 +36,10 @@ export default function HeroSection() {
 
         {/* Subtext */}
         <p className="mx-auto mt-2 max-w-xl font-sans text-xs leading-relaxed text-muted md:mt-3 md:text-sm">
-          Missed calls cost dental practices thousands in lost patients. Your
-          custom AI receptionist can answer every call or missed call, day or
-          night — booking appointments, handling insurance questions, and
-          managing dental emergencies while you&apos;re with patients or
-          you&apos;re away. Enter your practice name and number below and based
-          on that we&apos;ll build a working demo you can talk to right now as a
-          sample.
+          Every missed call is a lost patient. Your AI receptionist answers
+          24/7 — booking appointments, handling insurance questions, and
+          managing emergencies while you&apos;re chairside. Enter your details
+          below to try a working demo now.
         </p>
 
         {/* Intake Form */}
