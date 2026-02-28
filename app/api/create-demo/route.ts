@@ -20,6 +20,7 @@ const DENTAL_KNOWLEDGE = {
 interface CreateDemoRequest {
   practiceName: string;
   phoneNumber: string;
+  goal: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -42,6 +43,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!body.goal?.trim()) {
+      return NextResponse.json(
+        { error: "Please select a goal" },
+        { status: 400 }
+      );
+    }
+
+    const primaryGoal = body.goal;
+
     // Step 1: Generate custom dental receptionist system prompt with Claude
     const claudeResponse = await anthropic.messages.create({
       model: "claude-sonnet-4-5-20250929",
@@ -55,7 +65,7 @@ Dental Practice Name: "${body.practiceName}"
 
 This receptionist answers phone calls for this dental practice. Here is what you need to know:
 
-Primary booking goal: ${DENTAL_KNOWLEDGE.primaryGoal}
+Primary goal selected by the practice: ${primaryGoal}
 Information to gather from callers: ${DENTAL_KNOWLEDGE.keyInfo}
 Common caller scenarios to handle: ${DENTAL_KNOWLEDGE.scenarios}
 How to handle pricing questions: ${DENTAL_KNOWLEDGE.pricingBehavior}
@@ -67,7 +77,7 @@ The system prompt you generate must:
 2. Sound like a real human dental receptionist — use contractions, casual phrasing, and a friendly, reassuring tone
 3. Follow the dental-specific booking flow above — ask the right questions in a natural conversational order, not all at once
 4. Ask ONE question at a time, wait for the answer, then ask the next
-5. Always work toward the primary goal: getting the patient booked or their info captured
+5. Always work toward the primary goal: "${primaryGoal}" — prioritize this above all else in every conversation
 6. Handle the common dental scenarios listed above naturally — be especially empathetic with patients in pain or dental emergencies
 7. Use the pricing guidance above when pricing comes up — never make up specific prices
 8. Keep every response to 1-3 sentences max — this is a phone call, not an email

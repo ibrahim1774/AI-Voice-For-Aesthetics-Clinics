@@ -160,6 +160,30 @@ export default function IntakeForm() {
             )}
           </div>
 
+          {/* Goal */}
+          <div>
+            <select
+              name="goal"
+              value={formData.goal}
+              onChange={handleChange}
+              className={`${inputClasses} ${!formData.goal ? "text-subtle" : ""}`}
+            >
+              <option value="" disabled>
+                What&apos;s the #1 goal for your AI receptionist?
+              </option>
+              {GOALS.map((goal) => (
+                <option key={goal} value={goal}>
+                  {goal}
+                </option>
+              ))}
+            </select>
+            {errors.goal && (
+              <p className="mt-1.5 text-sm text-red-400 font-sans">
+                {errors.goal}
+              </p>
+            )}
+          </div>
+
           {apiError && (
             <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3">
               <p className="text-sm text-red-400 font-sans">{apiError}</p>
