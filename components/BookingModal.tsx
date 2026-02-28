@@ -43,14 +43,14 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     <div className="fixed inset-0 z-[60] flex items-center justify-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/80"
         onClick={onClose}
       />
 
       {/* Modal Panel */}
-      <div className="relative z-10 mx-4 w-full max-w-2xl max-h-[90vh] overflow-hidden rounded-2xl border border-gold/20 bg-card">
+      <div className="relative z-10 mx-4 w-full max-w-2xl max-h-[95vh] overflow-hidden rounded-2xl border border-gold/20 bg-card">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+        <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 shrink-0">
           <h2 className="font-serif text-lg font-bold text-white">
             Book Your Setup Call
           </h2>
@@ -76,11 +76,10 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
         </div>
 
         {/* Calendar Widget */}
-        <div className="overflow-y-auto" style={{ height: "calc(90vh - 72px)" }}>
+        <div style={{ height: "calc(95vh - 72px)", overflowY: "auto", WebkitOverflowScrolling: "touch" }}>
           <iframe
             src={BOOKING_WIDGET_URL}
-            style={{ width: "100%", height: "100%", border: "none" }}
-            scrolling="no"
+            style={{ width: "100%", minHeight: "1200px", border: "none" }}
           />
         </div>
       </div>
