@@ -1,16 +1,21 @@
+"use client";
+
+import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
-import { BOOKING_URL } from "@/lib/constants";
+import BookingModal from "./BookingModal";
 
 const FEATURES = [
-  "Dedicated AI receptionist for your business",
-  "24/7 coverage — nights, weekends, holidays",
-  "Appointment booking & scheduling",
+  "Dedicated AI dental receptionist for your practice",
+  "24/7 coverage \u2014 nights, weekends, holidays",
+  "Patient appointment booking & scheduling",
   "Call summaries & transcripts",
   "Dedicated phone number",
-  "Cancel anytime — no contracts",
+  "Cancel anytime \u2014 no contracts",
 ];
 
 export default function PricingTeaser() {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+
   return (
     <section className="px-4 py-28 relative section-glow-divider overflow-hidden">
       <div className="relative mx-auto max-w-2xl">
@@ -26,13 +31,13 @@ export default function PricingTeaser() {
 
               <h2 className="font-serif text-4xl font-bold text-white md:text-5xl">
                 Ready to Never Miss
-                <br />a Call Again?
+                <br />a Patient Call Again?
               </h2>
 
               <p className="mt-6 font-sans text-muted max-w-md mx-auto">
-                Everything you need to capture every lead, book every
-                appointment, and grow your business — set up for you within 24
-                hours.
+                Everything you need to capture every patient, book every
+                appointment, and grow your dental practice — set up for you
+                within 24 hours.
               </p>
 
               <div className="mt-10 space-y-3 text-left max-w-sm mx-auto">
@@ -59,14 +64,12 @@ export default function PricingTeaser() {
                 ))}
               </div>
 
-              <a
-                href={BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setIsBookingOpen(true)}
                 className="mt-10 inline-block rounded-xl bg-gold px-10 py-4 font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.02] active:scale-[0.98]"
               >
-                Book a Call to Implement This for Your Business
-              </a>
+                Book a Call to Implement This for Your Practice
+              </button>
 
               <p className="mt-4 font-sans text-xs text-subtle">
                 Or{" "}
@@ -78,6 +81,12 @@ export default function PricingTeaser() {
           </div>
         </ScrollReveal>
       </div>
+
+      {/* Booking Calendar Modal */}
+      <BookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </section>
   );
 }

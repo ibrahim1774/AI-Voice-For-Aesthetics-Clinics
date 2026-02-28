@@ -2,14 +2,14 @@ import { redirect } from "next/navigation";
 import DemoExperience from "@/components/DemoExperience";
 
 interface DemoPageProps {
-  searchParams: Promise<{ assistantId?: string; businessName?: string }>;
+  searchParams: Promise<{ assistantId?: string; practiceName?: string }>;
 }
 
 export default async function DemoPage({ searchParams }: DemoPageProps) {
   const params = await searchParams;
-  const { assistantId, businessName } = params;
+  const { assistantId, practiceName } = params;
 
-  if (!assistantId || !businessName) {
+  if (!assistantId || !practiceName) {
     redirect("/");
   }
 
@@ -17,7 +17,7 @@ export default async function DemoPage({ searchParams }: DemoPageProps) {
     <main className="fixed inset-0 z-0 flex flex-col overflow-hidden">
       <DemoExperience
         assistantId={assistantId}
-        businessName={decodeURIComponent(businessName)}
+        practiceName={decodeURIComponent(practiceName)}
       />
     </main>
   );

@@ -30,16 +30,17 @@ export default function HeroSection() {
       <div className="relative z-10 mx-auto max-w-4xl w-full text-center">
         {/* Main headline */}
         <h1 className="font-serif text-xl font-bold leading-[1.2] text-white sm:text-2xl md:text-3xl lg:text-4xl">
-          Your Instant 24/7 Call Captain: Custom Demo Built in 20 Seconds{" "}
-          <span className="text-gold">– Don&#39;t Lose Out On Appointments or Jobs To Your Competitors</span>
+          Your 24/7 AI Dental Receptionist: Custom Demo Built in 20 Seconds{" "}
+          <span className="text-gold">— Never Lose a Patient to a Missed Call</span>
         </h1>
 
         {/* Subtext */}
         <p className="mx-auto mt-2 max-w-xl font-sans text-xs leading-relaxed text-muted md:mt-3 md:text-sm">
-          Missed calls cost contractors thousands. Your custom AI receptionist
-          answers every call, day or night — capturing leads and booking jobs
-          while you&#39;re on-site or after hours. Tell us your business and
-          we&#39;ll build a working demo you can talk to right now.
+          Missed calls cost dental practices thousands in lost patients. Your
+          custom AI receptionist answers every call, day or night — booking
+          appointments, handling insurance questions, and managing dental
+          emergencies while you&#39;re with patients. Enter your practice name
+          and we&#39;ll build a working demo you can talk to right now.
         </p>
 
         {/* Intake Form */}

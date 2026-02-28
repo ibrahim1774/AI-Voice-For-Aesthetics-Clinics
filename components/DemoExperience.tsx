@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Vapi from "@vapi-ai/web";
-import { BOOKING_URL } from "@/lib/constants";
+import BookingModal from "./BookingModal";
 
 interface TranscriptEntry {
   role: "assistant" | "user";
@@ -14,17 +14,18 @@ type CallStatus = "idle" | "connecting" | "active" | "ended";
 
 interface DemoExperienceProps {
   assistantId: string;
-  businessName: string;
+  practiceName: string;
 }
 
 export default function DemoExperience({
   assistantId,
-  businessName,
+  practiceName,
 }: DemoExperienceProps) {
   const [callStatus, setCallStatus] = useState<CallStatus>("idle");
   const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const vapiRef = useRef<Vapi | null>(null);
   const scrollableRef = useRef<HTMLDivElement>(null);
 
@@ -144,14 +145,14 @@ export default function DemoExperience({
         </div>
 
         <h1 className="font-serif text-xl font-bold text-white md:text-3xl">
-          Your AI Receptionist is Ready,{" "}
-          <span className="text-gold">{businessName}</span>
+          Your AI Dental Receptionist is Ready,{" "}
+          <span className="text-gold">{practiceName}</span>
         </h1>
 
         <p className="mt-2 font-sans text-sm text-muted max-w-lg mx-auto leading-relaxed">
-          Start a live call with your custom AI receptionist. Speak naturally — ask
-          about your services, try to book an appointment, or see how it handles
-          tough questions.
+          Start a live call with your custom AI dental receptionist. Speak
+          naturally — try booking a cleaning, ask about insurance, or see how it
+          handles a dental emergency.
         </p>
       </div>
 
@@ -313,15 +314,19 @@ export default function DemoExperience({
 
       {/* Bottom CTA — always visible */}
       <div className="shrink-0 pt-3 pb-1">
-        <a
-          href={BOOKING_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={() => setIsBookingOpen(true)}
           className="block w-full rounded-xl bg-gold py-3.5 text-center font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light"
         >
-          Book a Call to Implement This for Your Business
-        </a>
+          Book a Call to Implement This for Your Practice
+        </button>
       </div>
+
+      {/* Booking Calendar Modal */}
+      <BookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </div>
   );
 }

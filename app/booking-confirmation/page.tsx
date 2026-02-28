@@ -55,8 +55,8 @@ export default function BookingConfirmationPage() {
 
         <p className="mx-auto mt-4 max-w-md font-sans text-base leading-relaxed text-muted">
           Thank you for scheduling a call with us. We&apos;ll walk you through
-          how your AI receptionist will work for your business and get you set up
-          within 24 hours.
+          how your AI dental receptionist will work for your practice and get you
+          set up within 24 hours.
         </p>
 
         <div className="mt-8 gold-glow-border rounded-2xl p-6 text-left">
@@ -77,7 +77,7 @@ export default function BookingConfirmationPage() {
                 2
               </span>
               <p className="font-sans text-sm text-muted">
-                We&apos;ll discuss your business needs on the call
+                We&apos;ll discuss your dental practice needs on the call
               </p>
             </div>
             <div className="flex items-start gap-3">
@@ -85,7 +85,7 @@ export default function BookingConfirmationPage() {
                 3
               </span>
               <p className="font-sans text-sm text-muted">
-                Your AI receptionist gets built and goes live within 24 hours
+                Your AI dental receptionist gets built and goes live within 24 hours
               </p>
             </div>
           </div>

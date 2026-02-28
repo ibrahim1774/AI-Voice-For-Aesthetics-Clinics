@@ -2,31 +2,31 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
-import { BOOKING_URL } from "@/lib/constants";
+import BookingModal from "./BookingModal";
 
 const BENEFITS = [
-  "Never miss another lead or big job \u2014 24/7 call answering",
+  "Never miss another patient call \u2014 24/7 call answering",
   "Capture every caller\u2019s details automatically",
   "Professional first impression on every call",
   "Smart appointment scheduling built in",
-  "After-hours and emergency call coverage",
-  "Custom-trained AI that knows your specific business and services",
-  "Dedicated lead follow-up app",
+  "After-hours and dental emergency call coverage",
+  "Custom-trained AI that knows your dental practice and services",
+  "Dedicated patient lead follow-up app",
   "Replace your expensive answering service",
 ];
 
 const INCLUDED_ITEMS = [
   {
-    feature: "Lead Capture App",
-    detail: "An app for all your leads so you can follow up fast",
+    feature: "Patient Lead Capture App",
+    detail: "An app for all your patient leads so you can follow up fast",
   },
   {
     feature: "CRM System",
-    detail: "Manage and organize all your leads in one place",
+    detail: "Manage and organize all your patient leads in one place",
   },
   {
     feature: "Dedicated Phone Number",
-    detail: "A real business number connected to your AI receptionist",
+    detail: "A real business number connected to your AI dental receptionist",
   },
   {
     feature: "24-Hour Setup",
@@ -36,13 +36,14 @@ const INCLUDED_ITEMS = [
   {
     feature: "Custom AI Training",
     detail:
-      "We tailor the AI specifically to your business, services, and customer base",
+      "We tailor the AI specifically to your dental practice, services, and patient base",
   },
 ];
 
 
 export default function StickyCartBar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
@@ -78,24 +79,22 @@ export default function StickyCartBar() {
             boxShadow: "0 -4px 20px rgba(201, 168, 76, 0.15)",
           }}
         >
-          <a
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => setIsBookingOpen(true)}
             className="flex w-full items-center justify-between px-4 py-3.5 md:px-8"
           >
             <p className="font-sans text-sm text-muted md:text-base">
               <span className="hidden md:inline">
-                Get a 24/7 AI Receptionist for Your Business
+                Get a 24/7 AI Receptionist for Your Dental Practice
               </span>
               <span className="md:hidden">
-                24/7 AI Receptionist
+                24/7 AI Dental Receptionist
               </span>
             </p>
             <span className="shrink-0 rounded-lg bg-gold px-5 py-2.5 font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light md:px-6">
               Book a Call
             </span>
-          </a>
+          </button>
         </div>
       )}
 
@@ -148,16 +147,17 @@ export default function StickyCartBar() {
 
               {/* Header */}
               <h3 className="text-center font-serif text-xl font-bold leading-snug text-white md:text-2xl">
-                A Smart AI Receptionist That Answers Calls, Books Appointments, to Your Phone{" "}
+                A Smart AI Receptionist That Answers Calls &amp; Books Appointments for Your Dental Practice{" "}
                 <span className="text-gold">
-                  So It Helps You Not Lose a Job to a Competitor.
+                  So You Never Lose a Patient to a Missed Call.
                 </span>
               </h3>
               <div className="mx-auto mt-3 h-px w-20 bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
               <p className="mt-3 text-center font-sans text-sm leading-relaxed text-muted">
-                Every missed call could be worth $1,000&ndash;$10,000 in lost
-                jobs &mdash; calls you&apos;re probably missing. Implement a
-                foundation part of your business.
+                Every missed call could be a new patient worth thousands in
+                lifetime value &mdash; patients you&apos;re probably losing while
+                you&apos;re chairside. Implement a foundation part of your
+                dental practice.
               </p>
 
               {/* Benefits List */}
@@ -184,19 +184,20 @@ export default function StickyCartBar() {
                 ))}
               </div>
 
-              {/* CTA Button Moved to Middle */}
+              {/* CTA Button */}
               <div className="mt-10">
-                <a
-                  href={BOOKING_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => {
+                    closeDrawer();
+                    setIsBookingOpen(true);
+                  }}
                   className="block w-full rounded-xl bg-gold py-4 text-center font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.01] active:scale-[0.99]"
                   style={{
                     boxShadow: "0 0 20px rgba(201, 168, 76, 0.3)",
                   }}
                 >
-                  Book a Call to Implement This for Your Business
-                </a>
+                  Book a Call to Implement This for Your Practice
+                </button>
                 <p className="mt-3 text-center font-sans text-xs text-subtle">
                   We&apos;ll walk you through setup and have you live within 24
                   hours.
@@ -224,7 +225,7 @@ export default function StickyCartBar() {
 
               <div className="mt-10 text-center">
                 <p className="font-serif text-2xl font-bold text-white md:text-3xl">
-                  Ready to Stop Missing Calls?
+                  Ready to Stop Missing Patient Calls?
                 </p>
                 <p className="mt-2 font-sans text-sm text-muted">
                   Book a quick call and we&apos;ll have you set up within 24 hours.
@@ -234,6 +235,12 @@ export default function StickyCartBar() {
           </div>
         </div>
       </div>
+
+      {/* Booking Calendar Modal */}
+      <BookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </>
   );
 }
