@@ -5,16 +5,16 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
-const DENTAL_KNOWLEDGE = {
-  primaryGoal: "Book a patient appointment",
+const AESTHETICS_KNOWLEDGE = {
+  primaryGoal: "Book a consultation",
   keyInfo:
-    "New patient or existing, insurance provider and member ID, reason for visit (cleaning, checkup, toothache, cosmetic consultation, emergency), preferred date/time, any urgency or pain level",
+    "New or existing client, treatment of interest (Botox, fillers, laser, chemical peel, microneedling, body contouring), area of concern, any previous treatments, preferred date/time, contact name and phone number",
   scenarios:
-    "New patient wanting to book (cleaning, comprehensive exam), existing patient needing follow-up or routine cleaning, insurance verification questions, emergency/urgent visits (toothache, broken tooth, swelling), cosmetic consultations (whitening, veneers, Invisalign), cancellation or rescheduling requests",
+    "New client wanting a consultation, existing client booking a follow-up or repeat treatment, questions about specific treatments (Botox, Juvederm, Restylane, laser hair removal, IPL, microneedling, chemical peels, body contouring), pricing inquiries, recovery time questions, pre/post treatment instructions, package or membership inquiries",
   pricingBehavior:
-    'Say "we accept most major dental insurance plans — our front desk team will verify your specific coverage and any copay before your visit"',
+    'Say "our treatment pricing varies based on the area and amount of product needed — we offer complimentary consultations where our provider will create a personalized treatment plan with transparent pricing"',
   schedulingNotes:
-    "Differentiate between new patient appointments (longer slots for X-rays and comprehensive exam) and existing patient visits (routine cleanings, follow-ups), ask about morning or afternoon preference",
+    "Differentiate between initial consultations (longer, includes assessment) and repeat treatment appointments (shorter). Ask about their goals and areas of concern to route to the right provider",
 };
 
 interface CreateDemoRequest {
@@ -52,39 +52,39 @@ export async function POST(request: NextRequest) {
 
     const primaryGoal = body.goal;
 
-    // Step 1: Generate custom dental receptionist system prompt with Claude
+    // Step 1: Generate custom aesthetics receptionist system prompt with Claude
     const claudeResponse = await anthropic.messages.create({
       model: "claude-sonnet-4-5-20250929",
       max_tokens: 1024,
       messages: [
         {
           role: "user",
-          content: `You are an expert at creating AI receptionist system prompts for dental practices. Generate a custom system prompt for this dental practice:
+          content: `You are an expert at creating AI receptionist system prompts for aesthetics clinics. Generate a custom system prompt for this aesthetics clinic:
 
-Dental Practice Name: "${body.practiceName}"
+Aesthetics Clinic Name: "${body.practiceName}"
 
-This receptionist answers phone calls for this dental practice. Here is what you need to know:
+This receptionist answers phone calls for this aesthetics clinic. Here is what you need to know:
 
-Primary goal selected by the practice: ${primaryGoal}
-Information to gather from callers: ${DENTAL_KNOWLEDGE.keyInfo}
-Common caller scenarios to handle: ${DENTAL_KNOWLEDGE.scenarios}
-How to handle pricing questions: ${DENTAL_KNOWLEDGE.pricingBehavior}
-Scheduling notes: ${DENTAL_KNOWLEDGE.schedulingNotes}
+Primary goal selected by the clinic: ${primaryGoal}
+Information to gather from callers: ${AESTHETICS_KNOWLEDGE.keyInfo}
+Common caller scenarios to handle: ${AESTHETICS_KNOWLEDGE.scenarios}
+How to handle pricing questions: ${AESTHETICS_KNOWLEDGE.pricingBehavior}
+Scheduling notes: ${AESTHETICS_KNOWLEDGE.schedulingNotes}
 
 The system prompt you generate must:
 
-1. Greet callers warmly using the practice name: "${body.practiceName}"
-2. Sound like a real human dental receptionist — use contractions, casual phrasing, and a friendly, reassuring tone
-3. Follow the dental-specific booking flow above — ask the right questions in a natural conversational order, not all at once
+1. Greet callers warmly using the clinic name: "${body.practiceName}"
+2. Sound like a real human aesthetics receptionist — use contractions, casual phrasing, and a friendly, reassuring tone
+3. Follow the aesthetics-specific booking flow above — ask the right questions in a natural conversational order, not all at once
 4. Ask ONE question at a time, wait for the answer, then ask the next
 5. Always work toward the primary goal: "${primaryGoal}" — prioritize this above all else in every conversation
-6. Handle the common dental scenarios listed above naturally — be especially empathetic with patients in pain or dental emergencies
+6. Handle the common aesthetics scenarios listed above naturally — be especially empathetic with clients with treatment concerns or urgent consultations
 7. Use the pricing guidance above when pricing comes up — never make up specific prices
 8. Keep every response to 1-3 sentences max — this is a phone call, not an email
 9. If the caller asks something outside your knowledge, say "Let me have someone from our team get back to you on that — can I grab your name and number?"
 10. Always capture the caller's name and callback number before ending the call
 11. Never mention being AI unless directly asked
-12. Never fabricate information about the practice — don't make up dentist names, office hours, or specific services not mentioned
+12. Never fabricate information about the clinic — don't make up provider names, office hours, or specific services not mentioned
 
 Return ONLY the system prompt text. No markdown formatting, no explanations, no quotation marks wrapping it.`,
         },
@@ -100,7 +100,7 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
       throw new Error("Failed to generate system prompt");
     }
 
-    // Step 2: Create Vapi assistant with the custom dental prompt
+    // Step 2: Create Vapi assistant with the custom aesthetics prompt
     const vapiResponse = await fetch("https://api.vapi.ai/assistant", {
       method: "POST",
       headers: {
@@ -125,36 +125,33 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
           model: "nova-2",
           language: "en-US",
           keywords: [
-            "dental:2",
-            "dentist:2",
-            "cleaning:2",
-            "checkup:2",
-            "toothache:2",
-            "cavity:2",
-            "filling:2",
-            "crown:2",
-            "root canal:2",
-            "extraction:2",
-            "Invisalign:2",
-            "veneers:2",
-            "whitening:2",
-            "braces:2",
-            "orthodontics:2",
-            "periodontal:2",
-            "gingivitis:2",
-            "implant:2",
-            "dentures:2",
-            "X-ray:2",
-            "fluoride:2",
-            "hygienist:2",
-            "copay:2",
-            "PPO:2",
-            "HMO:2",
-            "Delta Dental:2",
-            "Cigna:2",
-            "Aetna:2",
-            "MetLife:2",
-            "Guardian:2",
+            "Botox:2",
+            "filler:2",
+            "Juvederm:2",
+            "Restylane:2",
+            "laser:2",
+            "microneedling:2",
+            "chemical peel:2",
+            "IPL:2",
+            "body contouring:2",
+            "CoolSculpting:2",
+            "Kybella:2",
+            "PRP:2",
+            "dermal filler:2",
+            "lip filler:2",
+            "anti-aging:2",
+            "wrinkle:2",
+            "collagen:2",
+            "skin tightening:2",
+            "hydrafacial:2",
+            "dermaplaning:2",
+            "consultation:2",
+            "injection:2",
+            "unit:2",
+            "syringe:2",
+            "recovery:2",
+            "downtime:2",
+            "provider:2",
           ],
         },
         firstMessage: `Thanks for calling ${body.practiceName}, how can I help you today?`,
