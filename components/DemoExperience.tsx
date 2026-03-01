@@ -242,11 +242,6 @@ export default function DemoExperience({
         )}
       </div>
 
-      {/* Sample disclaimer */}
-      <p className="text-center font-sans text-xs text-red-400/80 mb-3 shrink-0 max-w-md mx-auto leading-relaxed">
-        This is a sample receptionist based on limited info. Book a call and we&apos;ll fully customize it to your practice.
-      </p>
-
       {/* Active call indicator */}
       {callStatus === "active" && (
         <div className="flex justify-center mb-3 shrink-0">
@@ -310,10 +305,15 @@ export default function DemoExperience({
         </div>
       </div>
 
+      {/* Sample disclaimer */}
+      <p className="text-center font-sans text-xs text-red-400/80 mt-3 mb-1 shrink-0 max-w-md mx-auto leading-relaxed">
+        This is a sample receptionist for {practiceName} based on limited info. Book a call and we&apos;ll fully customize it for you.
+      </p>
+
       {/* Setup promise banner */}
-      <div className="shrink-0 mt-3 rounded-lg bg-gold/10 border border-gold/20 px-4 py-2.5 text-center">
+      <div className="shrink-0 mt-2 rounded-lg bg-gold/10 border border-gold/20 px-4 py-2.5 text-center">
         <p className="font-sans text-xs font-semibold text-gold">
-          Setup in 24 Hours — We Build Your Entire System for You
+          Setup in 24 Hours — We&apos;ll Build {practiceName}&apos;s Entire System
         </p>
       </div>
 
@@ -323,7 +323,7 @@ export default function DemoExperience({
           onClick={() => setIsBookingOpen(true)}
           className="block w-full rounded-xl bg-gold py-3.5 text-center font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light"
         >
-          Book a Call to Implement This for Your Practice
+          Book a Call to Implement This for {practiceName}
         </button>
       </div>
 
