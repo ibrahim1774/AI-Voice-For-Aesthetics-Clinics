@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import Vapi from "@vapi-ai/web";
 import BookingModal from "./BookingModal";
 
@@ -21,6 +22,16 @@ export default function DemoExperience({
   assistantId,
   practiceName,
 }: DemoExperienceProps) {
+  const pathname = usePathname();
+  const isBookingRoute = pathname.startsWith("/3");
+  const priceLabel = pathname.includes("/1")
+    ? "$19/month"
+    : pathname.includes("/2")
+    ? "$19/month \u2014 3-day trial"
+    : pathname.includes("/3")
+    ? null
+    : "$29/month";
+
   const [callStatus, setCallStatus] = useState<CallStatus>("idle");
   const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -319,12 +330,31 @@ export default function DemoExperience({
 
       {/* Bottom CTA — always visible */}
       <div className="shrink-0 pt-3 pb-1">
-        <button
-          onClick={() => setIsBookingOpen(true)}
-          className="block w-full rounded-xl bg-gold py-3.5 text-center font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light"
-        >
-          Book a Call to Implement This for {practiceName}
-        </button>
+        {priceLabel && (
+          <p className="text-center font-sans text-xs text-subtle mb-2">
+            Start for {priceLabel} — cancel anytime
+          </p>
+        )}
+        {isBookingRoute ? (
+          <button
+            onClick={() => setIsBookingOpen(true)}
+            className="block w-full rounded-xl bg-gold py-3.5 text-center font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light"
+          >
+            Book a Call to Implement This for {practiceName}
+          </button>
+        ) : (
+          <button
+            onClick={() => window.dispatchEvent(new Event("open-pricing-drawer"))}
+            className={`block w-full rounded-xl bg-gold text-center font-sans font-semibold text-background transition-all duration-300 hover:bg-gold-light ${
+              callStatus === "idle"
+                ? "py-3 text-sm opacity-70"
+                : "py-4 text-base hover:scale-[1.01] active:scale-[0.99]"
+            }`}
+            style={callStatus !== "idle" ? { boxShadow: "0 0 20px rgba(201, 168, 76, 0.35)" } : {}}
+          >
+            Set This Up For My {practiceName}
+          </button>
+        )}
       </div>
 
       {/* Booking Calendar Modal */}
