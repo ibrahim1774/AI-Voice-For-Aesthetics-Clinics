@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 declare global {
   interface Window {
@@ -8,8 +8,12 @@ declare global {
   }
 }
 
+const REDIRECT_URL = "https://primehubagency.com/success-page-1";
+const REDIRECT_DELAY = 3;
+
 export default function ThankYouPage() {
   const firedRef = useRef(false);
+  const [countdown, setCountdown] = useState(REDIRECT_DELAY);
 
   useEffect(() => {
     if (firedRef.current) return;
@@ -21,10 +25,18 @@ export default function ThankYouPage() {
     }
 
     // Server-side: fire Meta Conversions API
-    fetch("/api/meta-conversion", { method: "POST" }).catch(() => {
-      // Silent fail — client-side pixel is the primary tracker
-    });
+    fetch("/api/meta-conversion", { method: "POST" }).catch(() => {});
   }, []);
+
+  // Countdown + redirect
+  useEffect(() => {
+    if (countdown <= 0) {
+      window.location.href = REDIRECT_URL;
+      return;
+    }
+    const timer = setTimeout(() => setCountdown((c) => c - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [countdown]);
 
   return (
     <section className="relative flex min-h-[100dvh] items-center justify-center px-4 py-16 grid-bg overflow-hidden">
@@ -54,25 +66,27 @@ export default function ThankYouPage() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-md font-sans text-base leading-relaxed text-muted">
-          Your Aesthetics PrimeHub AI Receptionist is on the way. Complete the next step
-          so we can get your system set up within 24 hours.
+          Your AI Receptionist is on the way. We&apos;ll get your
+          system set up within 24 hours.
         </p>
 
-        <div className="mt-8">
+        <p className="mt-6 font-sans text-sm text-subtle">
+          Redirecting you in{" "}
+          <span className="text-gold font-semibold">{countdown}</span>
+          {countdown === 1 ? " second" : " seconds"}...
+        </p>
+
+        <div className="mt-4">
           <a
-            href="https://primehubagency.com/success"
+            href={REDIRECT_URL}
             className="inline-block w-full rounded-xl bg-gold px-8 py-4 font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.02] active:scale-[0.98]"
             style={{
               boxShadow: "0 0 20px rgba(201, 168, 76, 0.3)",
             }}
           >
-            Continue Setup
+            Continue Setup Now
           </a>
         </div>
-
-        <p className="mt-4 font-sans text-sm text-subtle">
-          Click above to complete your onboarding form.
-        </p>
       </div>
     </section>
   );
