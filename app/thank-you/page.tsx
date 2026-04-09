@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-const REDIRECT_URL = "https://primehubagency.com/success-page-1";
+const REDIRECT_URL = "https://app.gohighlevel.com/v2/preview/4Cfl2ya9UdYFoYuW868F";
 const REDIRECT_DELAY = 3;
 
 export default function ThankYouPage() {
