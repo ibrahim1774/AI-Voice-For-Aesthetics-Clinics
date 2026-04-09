@@ -151,19 +151,19 @@ export default function DemoExperience({
         <div className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-gold/5 px-4 py-1.5 mb-3">
           <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
           <span className="font-sans text-xs font-medium text-gold uppercase tracking-wider">
-            Live Demo
+            Live Experience
           </span>
         </div>
 
         <h1 className="font-serif text-xl font-bold text-white md:text-3xl">
-          Your AI Aesthetics Receptionist is Ready,{" "}
+          Your AI Concierge is Ready,{" "}
           <span className="text-gold">{practiceName}</span>
         </h1>
 
         <p className="mt-2 font-sans text-sm text-muted max-w-lg mx-auto leading-relaxed">
-          Start a live call with your custom AI aesthetics receptionist. Speak
-          naturally — try booking a consultation, ask about treatments, or see how it
-          handles a pricing question.
+          Start a live call with your personalized AI concierge. Try booking a
+          consultation, ask about treatments, or test how it handles pricing &mdash;
+          just like a real client would.
         </p>
       </div>
 
@@ -318,13 +318,13 @@ export default function DemoExperience({
 
       {/* Sample disclaimer */}
       <p className="text-center font-sans text-xs text-red-400/80 mt-3 mb-1 shrink-0 max-w-md mx-auto leading-relaxed">
-        This is a sample receptionist for {practiceName} based on limited info. Book a call and we&apos;ll fully customize it for you.
+        This is a preview concierge for {practiceName}. Book a call and we&apos;ll fully customize it for your practice.
       </p>
 
       {/* Setup promise banner */}
       <div className="shrink-0 mt-2 rounded-lg bg-gold/10 border border-gold/20 px-4 py-2.5 text-center">
         <p className="font-sans text-xs font-semibold text-gold">
-          Setup in 24 Hours — We&apos;ll Build {practiceName}&apos;s Entire System
+          White-Glove Setup in 24 Hours &mdash; We Handle Everything
         </p>
       </div>
 

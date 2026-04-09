@@ -127,10 +127,10 @@ export default function StickyCartBar() {
           >
             <p className="font-sans text-sm text-muted md:text-base">
               <span className="hidden md:inline">
-                Get a 24/7 AI Receptionist for Your Aesthetics Clinic
+                24/7 AI Concierge for Your Practice
               </span>
               <span className="md:hidden">
-                24/7 AI Aesthetics Receptionist
+                24/7 AI Concierge
               </span>
             </p>
             <span className="shrink-0 rounded-lg bg-gold px-5 py-2.5 font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light md:px-6">
@@ -189,17 +189,17 @@ export default function StickyCartBar() {
 
               {/* Header */}
               <h3 className="text-center font-serif text-xl font-bold leading-snug text-white md:text-2xl">
-                A Smart AI Receptionist That Answers Calls &amp; Books Consultations for Your Aesthetics Clinic{" "}
+                A Personalized AI Concierge That Answers Calls &amp; Books Consultations for Your Practice{" "}
                 <span className="text-gold">
                   So You Never Lose a Client to a Missed Call.
                 </span>
               </h3>
               <div className="mx-auto mt-3 h-px w-20 bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
               <p className="mt-3 text-center font-sans text-sm leading-relaxed text-muted">
-                Every missed call could be a new client worth thousands in
-                lifetime value &mdash; clients you&apos;re probably losing while
-                you&apos;re with a client. Implement a foundation part of your
-                aesthetics clinic.
+                Every missed call could be a client worth thousands in
+                lifetime value &mdash; clients you&apos;re losing while
+                you&apos;re in a treatment room. Elevate your practice with seamless
+                24/7 coverage.
               </p>
 
               {/* Benefits List */}

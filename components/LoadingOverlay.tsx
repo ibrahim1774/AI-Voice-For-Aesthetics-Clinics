@@ -7,8 +7,8 @@ interface LoadingOverlayProps {
 }
 
 const LOADING_MESSAGES = [
-  { text: "Analyzing your aesthetics clinic...", duration: 1500 },
-  { text: "Training your AI aesthetics receptionist...", duration: 2000 },
+  { text: "Personalizing your concierge...", duration: 1500 },
+  { text: "Training on your services...", duration: 2000 },
   { text: "Almost ready...", duration: 1000 },
 ];
 

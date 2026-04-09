@@ -3,21 +3,21 @@ import ScrollReveal from "./ScrollReveal";
 const STEPS = [
   {
     number: "01",
-    title: "Tell Us About Your Business",
+    title: "Share Your Practice Details",
     description:
-      "Enter your business name and what you do. Takes 30 seconds.",
+      "Your clinic name, phone, and primary goal. That\u2019s all we need.",
   },
   {
     number: "02",
-    title: "We Build Your AI Receptionist",
+    title: "We Create Your Concierge",
     description:
-      "Our AI instantly creates a custom receptionist trained on your services.",
+      "In seconds, your AI is trained on aesthetics services and your specific practice.",
   },
   {
     number: "03",
-    title: "Test It Live, Right Now",
+    title: "Experience It Live",
     description:
-      "Talk to your receptionist right in your browser. No downloads. No setup.",
+      "Call your concierge from your browser. Hear exactly how your clients will be greeted.",
   },
 ];
 
@@ -30,7 +30,7 @@ export default function HowItWorks() {
             How It Works
           </p>
           <h2 className="font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-            Up and Running in{" "}
+            Live in Under{" "}
             <span className="text-gold">60 Seconds</span>
           </h2>
         </ScrollReveal>

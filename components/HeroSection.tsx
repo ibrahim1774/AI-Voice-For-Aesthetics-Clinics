@@ -4,7 +4,7 @@ export default function HeroSection() {
   return (
     <section className="relative flex min-h-[100dvh] items-center justify-center px-4 py-4 md:py-12 aurora-bg overflow-hidden">
       {/* Subtle radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(201,168,76,0.08)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(196,168,130,0.08)_0%,transparent_70%)]" />
 
       {/* Static ambient orb for depth */}
       <div
@@ -15,7 +15,7 @@ export default function HeroSection() {
           transform: "translateX(-50%)",
           width: "500px",
           height: "400px",
-          background: "rgba(201, 168, 76, 0.04)",
+          background: "rgba(196, 168, 130, 0.04)",
           filter: "blur(60px)",
         }}
       />
@@ -23,13 +23,13 @@ export default function HeroSection() {
       {/* Top edge glow line */}
       <div
         className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"
-        style={{ boxShadow: "0 0 15px rgba(201, 168, 76, 0.2)" }}
+        style={{ boxShadow: "0 0 15px rgba(196, 168, 130, 0.2)" }}
       />
 
       {/* Logo */}
       <div className="absolute top-4 left-5 z-20 md:top-6 md:left-8">
         <span className="font-serif text-lg font-bold text-white md:text-xl">
-          Aesthetics PrimeHub <span className="text-gold">AI</span>
+          Montivaro
         </span>
       </div>
 
@@ -37,16 +37,16 @@ export default function HeroSection() {
       <div className="relative z-10 mx-auto max-w-4xl w-full text-center">
         {/* Main headline */}
         <h1 className="font-serif text-xl font-bold leading-[1.2] text-white sm:text-2xl md:text-3xl lg:text-4xl">
-          Your 24/7 AI Aesthetics Receptionist: Custom Demo Built in 20 Seconds{" "}
-          <span className="text-gold">— Don&apos;t Lose a Client to a Missed Call</span>
+          Your Clinic&apos;s 24/7 AI Concierge{" "}
+          <span className="text-gold">&mdash; Personalized Demo in 20 Seconds</span>
         </h1>
 
         {/* Subtext */}
         <p className="mx-auto mt-2 max-w-xl font-sans text-xs leading-relaxed text-muted md:mt-3 md:text-sm">
-          Every missed call is a lost client. Your AI receptionist answers
-          24/7 — booking consultations, handling treatment questions, and
-          managing pricing inquiries while you&apos;re with a client. Enter your details
-          below to try a working demo now.
+          Every unanswered call is a client choosing someone else. Your AI
+          concierge answers instantly &mdash; booking consultations, answering
+          treatment questions, and delivering a seamless first impression. Try a
+          live demo now.
         </p>
 
         {/* Intake Form */}

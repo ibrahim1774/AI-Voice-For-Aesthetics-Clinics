@@ -17,13 +17,13 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Aesthetics PrimeHub AI | Never Miss a Client Call Again",
+  title: "Montivaro | The AI Concierge for Luxury Aesthetics Clinics",
   description:
-    "Your 24/7 AI aesthetics receptionist answers every call, books consultations, handles treatment questions, and manages pricing inquiries — so you never lose a client to a missed call.",
+    "Your 24/7 AI concierge answers every call, books consultations, and delivers a seamless client experience — so your practice never misses an opportunity.",
   openGraph: {
-    title: "Aesthetics PrimeHub AI | Never Miss a Client Call Again",
+    title: "Montivaro | The AI Concierge for Luxury Aesthetics Clinics",
     description:
-      "Your 24/7 AI aesthetics receptionist answers every call, books consultations, and handles treatment questions — so you never lose a client to a missed call.",
+      "Your 24/7 AI concierge answers every call, books consultations, and delivers a seamless client experience — so your practice never misses an opportunity.",
     type: "website",
   },
 };

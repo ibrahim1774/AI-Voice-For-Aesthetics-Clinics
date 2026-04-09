@@ -5,9 +5,9 @@ import ScrollReveal from "./ScrollReveal";
 import BookingModal from "./BookingModal";
 
 const FEATURES = [
-  "Dedicated AI aesthetics receptionist for your clinic",
+  "Personalized AI concierge for your practice",
   "24/7 coverage \u2014 nights, weekends, holidays",
-  "Consultation booking & scheduling",
+  "Seamless consultation booking & scheduling",
   "Call summaries & transcripts",
   "Dedicated phone number",
   "Cancel anytime \u2014 no contracts",
@@ -22,7 +22,7 @@ export default function PricingTeaser() {
         <ScrollReveal>
           <div className="gold-glow-border rounded-3xl p-10 text-center md:p-14 relative overflow-hidden">
             {/* Subtle radial glow inside card */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,168,76,0.06)_0%,transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(196,168,130,0.06)_0%,transparent_50%)]" />
 
             <div className="relative">
               <p className="font-sans text-sm uppercase tracking-[0.25em] text-gold mb-6">
@@ -30,14 +30,13 @@ export default function PricingTeaser() {
               </p>
 
               <h2 className="font-serif text-4xl font-bold text-white md:text-5xl">
-                Ready to Never Miss
-                <br />a Client Call Again?
+                Ready to Elevate Your
+                <br />Client Experience?
               </h2>
 
               <p className="mt-6 font-sans text-muted max-w-md mx-auto">
-                Everything you need to capture every client, book every
-                consultation, and grow your aesthetics clinic — set up for you
-                within 24 hours.
+                Everything you need to deliver a seamless, 24/7 client
+                experience &mdash; set up for your practice within 24 hours.
               </p>
 
               <div className="mt-10 space-y-3 text-left max-w-sm mx-auto">

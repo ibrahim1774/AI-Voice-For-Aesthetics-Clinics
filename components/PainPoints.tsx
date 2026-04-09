@@ -5,25 +5,25 @@ const STATS = [
     stat: "40%",
     headline: "of calls to aesthetics clinics go unanswered",
     detail:
-      "The average aesthetics clinic misses nearly half of all incoming calls. Each one of those could be a $500, $2,000, or even $10,000 treatment package — gone to your competitor in seconds.",
+      "Nearly half of incoming calls never get answered. Each one could be a $500 facial, a $2,000 filler package, or a $10,000 lifetime client \u2014 lost to a competitor in seconds.",
   },
   {
     stat: "80%",
-    headline: "of callers won't leave a voicemail",
+    headline: "of callers won\u2019t leave a voicemail",
     detail:
-      "Your voicemail isn't cutting it. Eight out of ten callers will hang up and call the next aesthetics clinic on the list. By the time you call back, they've already booked someone else.",
+      "Eight out of ten callers hang up and call the next clinic. By the time you call back, they\u2019ve already booked a consultation elsewhere.",
   },
   {
     stat: "$500",
-    headline: "per month for an answering service",
+    headline: "per month for a generic answering service",
     detail:
-      "Traditional answering services cost $300–500/month and still put callers on hold. They don't know your business, can't book consultations, and call in sick on Mondays.",
+      "Traditional answering services cost $300\u2013500/month, put callers on hold, and know nothing about your treatments. Your clients deserve better.",
   },
   {
     stat: "24/7",
-    headline: "coverage that never sleeps",
+    headline: "seamless coverage, always on",
     detail:
-      "Aesthetics PrimeHub AI answers instantly, every time. It knows your business, books consultations, takes messages, and never misses a shift. Nights, weekends, holidays — always on.",
+      "Montivaro answers instantly, every time. It knows your services, books consultations, and delivers a polished first impression \u2014 nights, weekends, holidays.",
   },
 ];
 
@@ -36,11 +36,11 @@ export default function PainPoints() {
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal className="text-center mb-20">
           <p className="font-sans text-sm uppercase tracking-[0.25em] text-gold mb-4">
-            The Problem
+            The Reality
           </p>
           <h2 className="font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-            Every Missed Call Costs You{" "}
-            <span className="text-gold">Money</span>
+            Every Missed Call Is a{" "}
+            <span className="text-gold">Client Lost</span>
           </h2>
         </ScrollReveal>
 
@@ -57,7 +57,7 @@ export default function PainPoints() {
                 <p className="mt-3 font-sans text-muted leading-relaxed">
                   {item.detail}
                 </p>
-                <div className="mt-6 h-px w-16 bg-gradient-to-r from-gold/40 to-transparent" style={{ boxShadow: "0 0 8px rgba(201, 168, 76, 0.15)" }} />
+                <div className="mt-6 h-px w-16 bg-gradient-to-r from-gold/40 to-transparent" style={{ boxShadow: "0 0 8px rgba(196, 168, 130, 0.15)" }} />
               </div>
             </ScrollReveal>
           ))}
