@@ -35,9 +35,9 @@ export async function POST(request: NextRequest) {
         metadata: { businessName },
         ...(trialDays > 0 ? { trial_period_days: trialDays } : {}),
       },
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.primevoiceai.com"}/thank-you`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.montivaro.com"}/thank-you`,
       cancel_url:
-        process.env.NEXT_PUBLIC_SITE_URL || "https://www.primevoiceai.com",
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.montivaro.com",
       metadata: { businessName },
     });
 
