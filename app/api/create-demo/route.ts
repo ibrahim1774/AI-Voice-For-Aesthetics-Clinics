@@ -20,7 +20,8 @@ const AESTHETICS_KNOWLEDGE = {
 interface CreateDemoRequest {
   practiceName: string;
   phoneNumber: string;
-  goal: string;
+  industry: string;
+  voiceGender?: "female" | "male";
 }
 
 export async function POST(request: NextRequest) {
@@ -43,14 +44,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!body.goal?.trim()) {
+    if (!body.industry?.trim()) {
       return NextResponse.json(
-        { error: "Please select a goal" },
+        { error: "Industry is required" },
         { status: 400 }
       );
     }
 
-    const primaryGoal = body.goal;
+    const voiceId = body.voiceGender === "male"
+      ? "iP95p4xoKVk53GoZ742B"
+      : "paula";
 
     // Step 1: Generate custom aesthetics receptionist system prompt with Claude
     const claudeResponse = await anthropic.messages.create({
@@ -62,10 +65,11 @@ export async function POST(request: NextRequest) {
           content: `You are an expert at creating AI receptionist system prompts for aesthetics clinics. Generate a custom system prompt for this aesthetics clinic:
 
 Aesthetics Clinic Name: "${body.practiceName}"
+Industry / Specialty: "${body.industry}"
 
 This receptionist answers phone calls for this aesthetics clinic. Here is what you need to know:
 
-Primary goal selected by the clinic: ${primaryGoal}
+Primary goal: ${AESTHETICS_KNOWLEDGE.primaryGoal}
 Information to gather from callers: ${AESTHETICS_KNOWLEDGE.keyInfo}
 Common caller scenarios to handle: ${AESTHETICS_KNOWLEDGE.scenarios}
 How to handle pricing questions: ${AESTHETICS_KNOWLEDGE.pricingBehavior}
@@ -77,7 +81,7 @@ The system prompt you generate must:
 2. Sound like a real human aesthetics receptionist — use contractions, casual phrasing, and a friendly, reassuring tone
 3. Follow the aesthetics-specific booking flow above — ask the right questions in a natural conversational order, not all at once
 4. Ask ONE question at a time, wait for the answer, then ask the next
-5. Always work toward the primary goal: "${primaryGoal}" — prioritize this above all else in every conversation
+5. Always work toward the primary goal: booking a consultation — prioritize this above all else in every conversation
 6. Handle the common aesthetics scenarios listed above naturally — be especially empathetic with clients with treatment concerns or urgent consultations
 7. Use the pricing guidance above when pricing comes up — never make up specific prices
 8. Keep every response to 1-3 sentences max — this is a phone call, not an email
@@ -85,6 +89,10 @@ The system prompt you generate must:
 10. Always capture the caller's name and callback number before ending the call
 11. Never mention being AI unless directly asked
 12. Never fabricate information about the clinic — don't make up provider names, office hours, or specific services not mentioned
+13. Match the caller's energy — if they're upbeat, be upbeat back; if they're calm and serious, mirror that
+14. Use natural filler words sparingly (e.g. "Oh absolutely", "Yeah for sure", "Hmm let me think")
+15. Show genuine enthusiasm when a caller expresses interest in a treatment — a little wit goes a long way
+16. Occasionally use subtle emotion tags like [laughs], [sighs], [chuckles] to feel more human and expressive
 
 Return ONLY the system prompt text. No markdown formatting, no explanations, no quotation marks wrapping it.`,
         },
@@ -118,7 +126,12 @@ Return ONLY the system prompt text. No markdown formatting, no explanations, no 
         },
         voice: {
           provider: "11labs",
-          voiceId: "paula",
+          voiceId,
+          model: "eleven_v3",
+          stability: 0.25,
+          similarityBoost: 0.88,
+          style: 0.8,
+          useSpeakerBoost: true,
         },
         transcriber: {
           provider: "deepgram",

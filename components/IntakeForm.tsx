@@ -1,27 +1,31 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import LoadingOverlay from "./LoadingOverlay";
 
-const GOALS = [
-  "Book Consultations",
-  "Answer Treatment Questions",
-  "Handle Pricing Inquiries",
-  "Follow-Up Reminders",
-  "Full Front Desk Coverage",
+const INDUSTRIES = [
+  "Botox",
+  "Fillers",
+  "Laser Hair Removal",
+  "Facials",
+  "Chemical Peels",
+  "Microneedling",
+  "Body Contouring",
+  "IV Therapy",
 ];
 
 interface FormData {
   practiceName: string;
   phoneNumber: string;
-  goal: string;
+  industry: string;
+  voiceGender: "female" | "male";
 }
 
 interface FormErrors {
   practiceName?: string;
   phoneNumber?: string;
-  goal?: string;
+  industry?: string;
 }
 
 const MINIMUM_LOADING_TIME = 4500;
@@ -32,11 +36,22 @@ export default function IntakeForm() {
   const [formData, setFormData] = useState<FormData>({
     practiceName: "",
     phoneNumber: "",
-    goal: "",
+    industry: "",
+    voiceGender: "female",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
+  const [industryFocused, setIndustryFocused] = useState(false);
+
+  useEffect(() => {
+    if (industryFocused) return;
+    const id = setInterval(() => {
+      setPlaceholderIndex((prev) => (prev + 1) % INDUSTRIES.length);
+    }, 1800);
+    return () => clearInterval(id);
+  }, [industryFocused]);
 
   function validate(): boolean {
     const newErrors: FormErrors = {};
@@ -50,8 +65,8 @@ export default function IntakeForm() {
       newErrors.phoneNumber = "Enter a valid phone number";
     }
 
-    if (!formData.goal) {
-      newErrors.goal = "Please select a goal";
+    if (!formData.industry.trim()) {
+      newErrors.industry = "Industry is required";
     }
 
     setErrors(newErrors);
@@ -79,7 +94,8 @@ export default function IntakeForm() {
           body: JSON.stringify({
             practiceName: formData.practiceName,
             phoneNumber: formData.phoneNumber,
-            goal: formData.goal,
+            industry: formData.industry,
+            voiceGender: formData.voiceGender,
           }),
         }).catch(() => {}),
         new Promise((resolve) => setTimeout(resolve, MINIMUM_LOADING_TIME)),
@@ -169,28 +185,45 @@ export default function IntakeForm() {
             )}
           </div>
 
-          {/* Goal */}
+          {/* Industry */}
           <div>
-            <select
-              name="goal"
-              value={formData.goal}
+            <input
+              type="text"
+              name="industry"
+              placeholder={`Specialty — e.g. ${INDUSTRIES[placeholderIndex]}`}
+              value={formData.industry}
               onChange={handleChange}
-              className={`${inputClasses} ${!formData.goal ? "text-subtle" : ""}`}
-            >
-              <option value="" disabled>
-                What&apos;s the #1 goal for your AI receptionist?
-              </option>
-              {GOALS.map((goal) => (
-                <option key={goal} value={goal}>
-                  {goal}
-                </option>
-              ))}
-            </select>
-            {errors.goal && (
+              onFocus={() => setIndustryFocused(true)}
+              onBlur={() => setIndustryFocused(false)}
+              className={inputClasses}
+              autoComplete="off"
+            />
+            {errors.industry && (
               <p className="mt-1.5 text-sm text-red-400 font-sans">
-                {errors.goal}
+                {errors.industry}
               </p>
             )}
+          </div>
+
+          {/* Voice Gender Toggle */}
+          <div>
+            <p className="font-sans text-xs text-subtle mb-2">Voice</p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setFormData((prev) => ({ ...prev, voiceGender: "female" as const }))}
+                className={`flex-1 rounded-lg py-2.5 font-sans text-sm font-medium transition-all duration-200 ${formData.voiceGender === "female" ? "bg-gold text-background" : "border border-white/[0.07] bg-charcoal/70 text-subtle hover:text-white"}`}
+              >
+                Female
+              </button>
+              <button
+                type="button"
+                onClick={() => setFormData((prev) => ({ ...prev, voiceGender: "male" as const }))}
+                className={`flex-1 rounded-lg py-2.5 font-sans text-sm font-medium transition-all duration-200 ${formData.voiceGender === "male" ? "bg-gold text-background" : "border border-white/[0.07] bg-charcoal/70 text-subtle hover:text-white"}`}
+              >
+                Male
+              </button>
+            </div>
           </div>
 
           {apiError && (
@@ -204,8 +237,12 @@ export default function IntakeForm() {
             disabled={isLoading}
             className="w-full rounded-xl bg-gold px-6 py-3.5 font-sans text-sm font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
-            Create My AI Concierge
+            HEAR MY LIVE DEMO &rarr;
           </button>
+
+          <p className="text-center font-sans text-xs text-subtle">
+            Free. No commitment. Just listen.
+          </p>
         </form>
       </div>
     </>

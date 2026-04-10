@@ -165,6 +165,10 @@ export default function DemoExperience({
           consultation, ask about treatments, or test how it handles pricing &mdash;
           just like a real client would.
         </p>
+
+        <p className="mt-2 font-sans text-xs text-red-400 max-w-lg mx-auto leading-relaxed">
+          Note: Please allow access to your microphone when prompted — the demo requires it to work. If denied, the call will fail.
+        </p>
       </div>
 
       {/* Call Controls */}

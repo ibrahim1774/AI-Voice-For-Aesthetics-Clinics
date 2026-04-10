@@ -37,16 +37,13 @@ export default function HeroSection() {
       <div className="relative z-10 mx-auto max-w-4xl w-full text-center">
         {/* Main headline */}
         <h1 className="font-serif text-xl font-bold leading-[1.2] text-white sm:text-2xl md:text-3xl lg:text-4xl">
-          Your Clinic&apos;s 24/7 AI Concierge{" "}
-          <span className="text-gold">&mdash; Personalized Demo in 20 Seconds</span>
+          Aesthetics Clinics: Stop missing calls. Start booking consultations —{" "}
+          <span className="text-gold">even at 2am.</span>
         </h1>
 
         {/* Subtext */}
         <p className="mx-auto mt-2 max-w-xl font-sans text-xs leading-relaxed text-muted md:mt-3 md:text-sm">
-          Every unanswered call is a client choosing someone else. Your AI
-          concierge answers instantly &mdash; booking consultations, answering
-          treatment questions, and delivering a seamless first impression. Try a
-          live demo now.
+          An AI receptionist that answers your phone, talks to clients, and books consultations while you&apos;re with a patient. Enter your info below and hear a live demo in about 20 seconds.
         </p>
 
         {/* Intake Form */}
