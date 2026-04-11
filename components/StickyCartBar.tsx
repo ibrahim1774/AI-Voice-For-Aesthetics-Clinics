@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import BookingModal from "./BookingModal";
 
 const BENEFITS = [
-  "Never miss another client call \u2014 24/7 call answering",
+  "Never miss another client call — 24/7 call answering",
   "Capture every caller\u2019s details automatically",
   "Professional first impression on every call",
   "Smart consultation scheduling built in",
@@ -52,7 +52,7 @@ export default function StickyCartBar() {
   const priceConfig = pathname.startsWith("/1")
     ? { price: 19, trialDays: 0, label: "$19/mo", labelLong: "$19/month", trialText: "" }
     : pathname.startsWith("/2")
-    ? { price: 19, trialDays: 3, label: "$19/mo", labelLong: "$19/month", trialText: " \u2014 3-day trial" }
+    ? { price: 19, trialDays: 3, label: "$19/mo", labelLong: "$19/month", trialText: " — 3-day trial" }
     : isBookingRoute
     ? null
     : { price: 29, trialDays: 0, label: "$29/mo", labelLong: "$29/month", trialText: "" };
@@ -116,9 +116,9 @@ export default function StickyCartBar() {
       {/* Sticky Bottom Bar */}
       {showStickyBar && (
         <div
-          className="fixed bottom-0 left-0 right-0 z-40 border-t border-gold/30 bg-background/95 backdrop-blur-md"
+          className="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-background/95 backdrop-blur-md"
           style={{
-            boxShadow: "0 -4px 20px rgba(201, 168, 76, 0.15)",
+            boxShadow: "0 -4px 20px rgba(13, 148, 136, 0.15)",
           }}
         >
           <button
@@ -158,7 +158,7 @@ export default function StickyCartBar() {
           className={`absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto rounded-t-3xl border-t border-gold/20 bg-card custom-scrollbar transition-transform duration-300 ease-out ${isDrawerOpen ? "translate-y-0" : "translate-y-full"
             }`}
           style={{
-            boxShadow: "0 -8px 40px rgba(201, 168, 76, 0.1)",
+            boxShadow: "0 -8px 40px rgba(13, 148, 136, 0.1)",
           }}
         >
           <div className="relative p-6 md:p-10">
@@ -166,7 +166,7 @@ export default function StickyCartBar() {
               {/* Close Button */}
               <button
                 onClick={closeDrawer}
-                className="absolute right-4 top-4 rounded-full p-2 text-subtle transition-colors hover:text-white md:right-6 md:top-6"
+                className="absolute right-4 top-4 rounded-full p-2 text-subtle transition-colors hover:text-foreground md:right-6 md:top-6"
                 aria-label="Close"
               >
                 <svg
@@ -188,7 +188,7 @@ export default function StickyCartBar() {
               <div className="mx-auto mb-6 h-1 w-12 rounded-full bg-gold/40" />
 
               {/* Header */}
-              <h3 className="text-center font-serif text-xl font-bold leading-snug text-white md:text-2xl">
+              <h3 className="text-center font-serif text-xl font-bold leading-snug text-foreground md:text-2xl">
                 A Personalized AI Concierge That Answers Calls &amp; Books Consultations for Your Practice{" "}
                 <span className="text-gold">
                   So You Never Lose a Client to a Missed Call.
@@ -230,7 +230,7 @@ export default function StickyCartBar() {
               <div className="mt-10">
                 {priceConfig ? (
                   <>
-                    <p className="text-center font-sans text-sm font-semibold text-white mb-1">
+                    <p className="text-center font-sans text-sm font-semibold text-foreground mb-1">
                       Start for {priceConfig.labelLong}{priceConfig.trialText} &mdash; cancel anytime
                     </p>
                     <p className="text-center font-sans text-xs text-subtle mb-4">
@@ -241,7 +241,7 @@ export default function StickyCartBar() {
                       disabled={isCheckingOut}
                       className="block w-full rounded-xl bg-gold py-4 text-center font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
                       style={{
-                        boxShadow: "0 0 20px rgba(201, 168, 76, 0.3)",
+                        boxShadow: "0 0 20px rgba(13, 148, 136, 0.3)",
                       }}
                     >
                       {isCheckingOut ? "Redirecting..." : "Set This Up For My Practice"}
@@ -259,7 +259,7 @@ export default function StickyCartBar() {
                       }}
                       className="block w-full rounded-xl bg-gold py-4 text-center font-sans text-base font-semibold text-background transition-all duration-300 hover:bg-gold-light hover:scale-[1.01] active:scale-[0.99]"
                       style={{
-                        boxShadow: "0 0 20px rgba(201, 168, 76, 0.3)",
+                        boxShadow: "0 0 20px rgba(13, 148, 136, 0.3)",
                       }}
                     >
                       Book a Call to Implement This for Your Practice
@@ -284,7 +284,7 @@ export default function StickyCartBar() {
                       className={`px-5 py-3.5 font-sans text-sm ${i % 2 === 0 ? "bg-card" : "bg-charcoal/50"
                         }`}
                     >
-                      <p className="font-medium text-white">{item.feature}</p>
+                      <p className="font-medium text-foreground">{item.feature}</p>
                       <p className="mt-0.5 text-muted">{item.detail}</p>
                     </div>
                   ))}
@@ -308,7 +308,7 @@ export default function StickyCartBar() {
                   </>
                 ) : (
                   <>
-                    <p className="font-serif text-2xl font-bold text-white md:text-3xl">
+                    <p className="font-serif text-2xl font-bold text-foreground md:text-3xl">
                       Ready to Stop Missing Client Calls?
                     </p>
                     <p className="mt-2 font-sans text-sm text-muted">

@@ -27,7 +27,7 @@ export default function DemoExperience({
   const priceLabel = pathname.includes("/1")
     ? "$19/month"
     : pathname.includes("/2")
-    ? "$19/month \u2014 3-day trial"
+    ? "$19/month — 3-day trial"
     : pathname.includes("/3")
     ? null
     : "$29/month";
@@ -155,7 +155,7 @@ export default function DemoExperience({
           </span>
         </div>
 
-        <h1 className="font-serif text-xl font-bold text-white md:text-3xl">
+        <h1 className="font-serif text-xl font-bold text-foreground md:text-3xl">
           Your AI Concierge is Ready,{" "}
           <span className="text-gold">{practiceName}</span>
         </h1>
@@ -215,7 +215,7 @@ export default function DemoExperience({
               onClick={toggleMute}
               className={`rounded-full border px-6 py-4 font-sans text-sm font-medium transition-all duration-300 ${isMuted
                   ? "border-red-500/30 bg-red-500/10 text-red-400 hover:bg-red-500/20"
-                  : "border-white/20 bg-charcoal text-white hover:border-white/40"
+                  : "border-slate-200 bg-white text-foreground hover:border-slate-300"
                 }`}
             >
               {isMuted ? "Unmute" : "Mute"}
@@ -311,7 +311,7 @@ export default function DemoExperience({
                 <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-1 font-sans font-bold">
                   {entry.role === "assistant" ? "AI Receptionist" : "You"}
                 </p>
-                <p className="font-sans text-[15px] text-white leading-relaxed">
+                <p className="font-sans text-[15px] text-foreground leading-relaxed">
                   {entry.text}
                 </p>
               </div>
@@ -354,7 +354,7 @@ export default function DemoExperience({
                 ? "py-3 text-sm opacity-70"
                 : "py-4 text-base hover:scale-[1.01] active:scale-[0.99]"
             }`}
-            style={callStatus !== "idle" ? { boxShadow: "0 0 20px rgba(201, 168, 76, 0.35)" } : {}}
+            style={callStatus !== "idle" ? { boxShadow: "0 0 20px rgba(13, 148, 136, 0.35)" } : {}}
           >
             Set This Up For My {practiceName}
           </button>

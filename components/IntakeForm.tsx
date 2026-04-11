@@ -1,31 +1,28 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import LoadingOverlay from "./LoadingOverlay";
 
-const INDUSTRIES = [
-  "Botox",
-  "Fillers",
-  "Laser Hair Removal",
-  "Facials",
-  "Chemical Peels",
-  "Microneedling",
-  "Body Contouring",
-  "IV Therapy",
+const GOALS = [
+  "Book Consultations",
+  "Answer Treatment Questions",
+  "Handle Pricing Inquiries",
+  "Follow-Up Reminders",
+  "Full Front Desk Coverage",
 ];
 
 interface FormData {
   practiceName: string;
   phoneNumber: string;
-  industry: string;
+  goal: string;
   voiceGender: "female" | "male";
 }
 
 interface FormErrors {
   practiceName?: string;
   phoneNumber?: string;
-  industry?: string;
+  goal?: string;
 }
 
 const MINIMUM_LOADING_TIME = 4500;
@@ -36,22 +33,12 @@ export default function IntakeForm() {
   const [formData, setFormData] = useState<FormData>({
     practiceName: "",
     phoneNumber: "",
-    industry: "",
+    goal: "",
     voiceGender: "female",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
-  const [placeholderIndex, setPlaceholderIndex] = useState(0);
-  const [industryFocused, setIndustryFocused] = useState(false);
-
-  useEffect(() => {
-    if (industryFocused) return;
-    const id = setInterval(() => {
-      setPlaceholderIndex((prev) => (prev + 1) % INDUSTRIES.length);
-    }, 1800);
-    return () => clearInterval(id);
-  }, [industryFocused]);
 
   function validate(): boolean {
     const newErrors: FormErrors = {};
@@ -65,8 +52,8 @@ export default function IntakeForm() {
       newErrors.phoneNumber = "Enter a valid phone number";
     }
 
-    if (!formData.industry.trim()) {
-      newErrors.industry = "Industry is required";
+    if (!formData.goal.trim()) {
+      newErrors.goal = "Goal is required";
     }
 
     setErrors(newErrors);
@@ -94,7 +81,7 @@ export default function IntakeForm() {
           body: JSON.stringify({
             practiceName: formData.practiceName,
             phoneNumber: formData.phoneNumber,
-            industry: formData.industry,
+            goal: formData.goal,
             voiceGender: formData.voiceGender,
           }),
         }).catch(() => {}),
@@ -141,7 +128,7 @@ export default function IntakeForm() {
   }
 
   const inputClasses =
-    "w-full rounded-xl border border-white/[0.07] bg-charcoal/70 backdrop-blur-sm px-4 py-3 font-sans text-sm text-white placeholder:text-subtle focus:border-gold/40 focus:ring-1 focus:ring-gold/30 focus:bg-charcoal/90 transition-all duration-300";
+    "w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 font-sans text-sm text-foreground placeholder:text-subtle focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all duration-300";
 
   return (
     <>
@@ -185,22 +172,24 @@ export default function IntakeForm() {
             )}
           </div>
 
-          {/* Industry */}
+          {/* Goal */}
           <div>
-            <input
-              type="text"
-              name="industry"
-              placeholder={`Specialty — e.g. ${INDUSTRIES[placeholderIndex]}`}
-              value={formData.industry}
+            <select
+              name="goal"
+              value={formData.goal}
               onChange={handleChange}
-              onFocus={() => setIndustryFocused(true)}
-              onBlur={() => setIndustryFocused(false)}
               className={inputClasses}
-              autoComplete="off"
-            />
-            {errors.industry && (
+            >
+              <option value="">What&apos;s your #1 goal?</option>
+              {GOALS.map((g) => (
+                <option key={g} value={g}>
+                  {g}
+                </option>
+              ))}
+            </select>
+            {errors.goal && (
               <p className="mt-1.5 text-sm text-red-400 font-sans">
-                {errors.industry}
+                {errors.goal}
               </p>
             )}
           </div>
@@ -212,14 +201,14 @@ export default function IntakeForm() {
               <button
                 type="button"
                 onClick={() => setFormData((prev) => ({ ...prev, voiceGender: "female" as const }))}
-                className={`flex-1 rounded-lg py-2.5 font-sans text-sm font-medium transition-all duration-200 ${formData.voiceGender === "female" ? "bg-gold text-background" : "border border-white/[0.07] bg-charcoal/70 text-subtle hover:text-white"}`}
+                className={`flex-1 rounded-lg py-2.5 font-sans text-sm font-medium transition-all duration-200 ${formData.voiceGender === "female" ? "bg-gold text-background" : "border border-slate-200 bg-white text-subtle hover:text-foreground"}`}
               >
                 Female
               </button>
               <button
                 type="button"
                 onClick={() => setFormData((prev) => ({ ...prev, voiceGender: "male" as const }))}
-                className={`flex-1 rounded-lg py-2.5 font-sans text-sm font-medium transition-all duration-200 ${formData.voiceGender === "male" ? "bg-gold text-background" : "border border-white/[0.07] bg-charcoal/70 text-subtle hover:text-white"}`}
+                className={`flex-1 rounded-lg py-2.5 font-sans text-sm font-medium transition-all duration-200 ${formData.voiceGender === "male" ? "bg-gold text-background" : "border border-slate-200 bg-white text-subtle hover:text-foreground"}`}
               >
                 Male
               </button>

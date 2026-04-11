@@ -20,7 +20,7 @@ const AESTHETICS_KNOWLEDGE = {
 interface CreateDemoRequest {
   practiceName: string;
   phoneNumber: string;
-  industry: string;
+  goal: string;
   voiceGender?: "female" | "male";
 }
 
@@ -44,9 +44,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!body.industry?.trim()) {
+    if (!body.goal?.trim()) {
       return NextResponse.json(
-        { error: "Industry is required" },
+        { error: "Goal is required" },
         { status: 400 }
       );
     }
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
           content: `You are an expert at creating AI receptionist system prompts for aesthetics clinics. Generate a custom system prompt for this aesthetics clinic:
 
 Aesthetics Clinic Name: "${body.practiceName}"
-Industry / Specialty: "${body.industry}"
+Primary Goal: "${body.goal}"
 
 This receptionist answers phone calls for this aesthetics clinic. Here is what you need to know:
 
