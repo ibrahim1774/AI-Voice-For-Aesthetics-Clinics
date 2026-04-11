@@ -79,10 +79,9 @@ export default function IntakeForm() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            practiceName: formData.practiceName,
+            businessName: formData.practiceName,
             phoneNumber: formData.phoneNumber,
             goal: formData.goal,
-            voiceGender: formData.voiceGender,
           }),
         }).catch(() => {}),
         new Promise((resolve) => setTimeout(resolve, MINIMUM_LOADING_TIME)),
